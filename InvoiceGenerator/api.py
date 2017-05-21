@@ -41,13 +41,13 @@ class Address(UnicodeProperty):
         address_line = [
             self.summary,
             self.address,
-            u'%s %s' % (self.zip, self.city)
+            '%s %s' % (self.zip, self.city)
             ]
         if self.vat_id:
-            address_line.append(_(u'Vat in: %s') % self.vat_id)
+            address_line.append(_('Vat in: %s') % self.vat_id)
 
         if self.ir:
-            address_line.append(_(u'IR: %s') % self.ir)
+            address_line.append(_('IR: %s') % self.ir)
 
         return address_line
 
@@ -169,7 +169,7 @@ class Invoice(UnicodeProperty):
         self.payback = None
         self.taxable_date = None
         self.currency_locale = "cs_CZ.UTF-8"
-        self.currency = u"Kč"
+        self.currency = "Kč"
 
         for attr in self._attrs:
             self.__setattr__(attr, '')
@@ -217,7 +217,7 @@ class Invoice(UnicodeProperty):
 
     def generate_breakdown_vat_table(self):
         rows = []
-        for vat, items in self.generate_breakdown_vat().items():
+        for vat, items in list(self.generate_breakdown_vat().items()):
              rows.append((vat, items['total'], items['total_tax'], items['tax']))
 
         return rows
@@ -258,7 +258,7 @@ class QrCodeBuilder(object):
         except AttributeError:
             pass
 
-        qr_kwargs = {k: v for k, v in qr_kwargs.items() if v}
+        qr_kwargs = {k: v for k, v in list(qr_kwargs.items()) if v}
 
         return QRPlatbaGenerator(**qr_kwargs)
 

@@ -34,7 +34,7 @@ class AddressTest(unittest.TestCase):
 
         address_object = self.addresss_object(summary, address, city, zip_code)
 
-        expected = [summary, address, u'%s %s' % (zip_code, city)]
+        expected = [summary, address, '%s %s' % (zip_code, city)]
         self.assertEquals(expected, address_object.get_address_lines())
 
     def test_get_contact_lines(self):
